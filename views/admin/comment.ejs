@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style> body { background: #EADDCA; } </style>
+
+
+
+<body>
+
+    <%= name %>  
+
+    <table border>
+            <th>Issue</th>
+            <th>Description</th>
+            <th>Urgency</th>
+            <th>Comment</th>
+
+        <tr>
+            <form action="/admin/comment?_method=PUT" method="post">
+            <td> <%= issue_title %> </td>
+            <td> <%= description %> </td>
+            <td> <%= urgency %> </td>
+            <td> <textarea name = 'update_comment' placeholder="comment_here"> <%= comment %> </textarea></td>
+        </tr>
+    </table> <br>
+
+                <input type="hidden" name="id" value="<%= issue_id%>">
+                <input type="hidden" name="name" value="<%= name %>">
+                <button type="submit">Leave comment</button>
+            </form>
+
+        ⠀<a href="/admin/all_issues">Cancel</a>
+         
+
+
+</body>
+</html>

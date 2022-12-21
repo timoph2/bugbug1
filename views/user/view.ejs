@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    submitted issues <br> <br>
+
+    <table border>
+        <tr>
+            <th>issue_title</th>
+            <th>description</th>
+            <th>urgency</th>
+            <th>edit</th>
+            <th>delete</th>
+            <th>comment</th>
+            <th>createdAt / editedOn </th>
+        </tr>
+
+
+
+
+        <!-- foreach here that loop through returned list -->
+        <% issues.forEach( issue => { %>
+        <% let createdAt = issue.createdAt.toString() %>  
+        <% createdAt = createdAt.split(" ").slice(0,5).join(" ") %>  
+        <!-- TypeError, cant use string method on date object!!! -->
+        <!-- convert Date to string first by .toString() omg...  -->
+
+
+        <tr>
+            <td> <%= issue.issue_title %> </td>
+            <td> <%= issue.description %> </td>
+            <td> <%= issue.urgency %> </td>
+
+            <td> 
+                <form method="post" action="/user/edit" >      
+                    <button type='submit'value="<%=issue.createdAt%>" name="edit">Edit</button>  <!--sub issue._id with createdAt--> 
+                </form>
+            </td>
+
+            <td> 
+                <form method="post" action="/user/issues?_method=DELETE">
+                    <button type="submit" value="<%=issue.createdAt%>" name="delete">Delete</button>
+                 </form>
+            </td>
+
+            <td> <%= issue.comment %></td>
+            <td> <%= createdAt %> </td>
+
+        </tr>
+    <% }) %>
+    </table> <br>
+
+    <a href="/user">Return</a>
+
+
+</body>
+</html>

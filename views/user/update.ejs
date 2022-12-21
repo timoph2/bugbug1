@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+    <table border>
+            <th>Issue</th>
+            <th>Description</th>
+            <th>Urgency</th>
+            <th>Comment</th>
+        <tr>
+        <form action="/user/edit?_method=PUT" method="post">
+            <td><input type='text' name = 'issue_title' value='<%= issue_title %>' placeholder="issue_title"> </td>
+            <td><textarea name = 'description' placeholder="description"> <%= description %> </textarea></td>
+            <td><input type='number' name="urgency" min='0' max='3' value=<%= urgency %>> </td>
+            <td><%= comment %></td>
+        </tr>
+    </table> <br>
+    
+    <input type="hidden" name="id" value="<%= issue_id%>">
+        <button type="submit">Edit issue</button>
+        </form>
+
+        ⠀<a href="/user/issues">Cancel</a>
+         
+
+
+</body>
+</html>

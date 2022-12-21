@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style> 
+  body { background: #EADDCA; } 
+  /* #charts {max-width: 100%; height: auto; width: auto;} */
+  #charts {max-width: 100%; height: 450px; width: 500px;}
+</style>
+
+
+<body> 
+
+    <form name="filter">
+        <!-- <input type="radio"> name.... (use % for wildcard! eg n%)   <br> -->
+        option to REMOVE certain users. (drop list of multi select to exclude?)
+        <select name="cars">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+        </select> 
+        <!-- <select name="cars" []> -->
+    </form>  <br>
+
+
+
+    <!-- =========================== -->
+      <div id="charts">
+        <canvas id="urgencyChart"></canvas>   <br>
+        <canvas id="commentedChart"></canvas>
+      </div>
+    <!-- =========================== -->
+
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+          let urgent_one =  "<%= urgent_one %>"
+          let urgent_two =  "<%= urgent_two %>"
+          let urgent_three =  "<%= urgent_three %>"
+
+          let commented =  "<%= commented %>"
+          let non_commented =  "<%= non_commented %>"
+
+
+        let urgency_labels = ['One', 'Two', 'Three'] //x-axis labels
+        let urgency_data = [urgent_one, urgent_two, urgent_three] //data-points
+
+        let comment_labels = ['Commented', 'No Comment']  
+        let comment_data = [commented, non_commented] 
+
+
+        const ctx_urgency = document.getElementById('urgencyChart');
+        new Chart(ctx_urgency, {
+          type: 'bar', //line, pie, bar
+          data: {
+            labels: urgency_labels,
+            datasets: [{
+              label: 'no. of issues', //top legend label
+              data: urgency_data,
+            //   fill: true,
+            //   backgroundColor: gradient,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+
+
+        const ctx_comment = document.getElementById('commentedChart');
+        new Chart(ctx_comment, {
+          type: 'pie', 
+          data: {
+            labels: comment_labels,
+            datasets: [{
+              data: comment_data,
+            //   fill: true,
+            //   backgroundColor: gradient,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                ticks: {
+                    // callback: (value) => { return "$" + value + "m"} //add units to y axis 
+                },
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+    
+</body>
+</html>
